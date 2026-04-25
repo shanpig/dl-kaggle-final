@@ -1,0 +1,62 @@
+{
+  "run_name": "kaggle-friendly-v1",
+  "seed": 42,
+  "paths": {
+    "data_dir": "/kaggle/input/pixels-to-predictions",
+    "output_dir": "/kaggle/working"
+  },
+  "model": {
+    "model_id": "HuggingFaceTB/SmolVLM-500M-Instruct",
+    "img_size": 224,
+    "max_seq_length": 1024,
+    "max_new_tokens": 8
+  },
+  "training": {
+    "enabled": false,
+    "num_epochs": 3,
+    "per_device_train_batch_size": 1,
+    "per_device_eval_batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 0.0002,
+    "weight_decay": 0.01,
+    "warmup_ratio": 0.05,
+    "max_grad_norm": 1.0,
+    "lr_scheduler_type": "cosine",
+    "fp16": true,
+    "gradient_checkpointing": true
+  },
+  "qlora": {
+    "enabled": false,
+    "load_in_4bit": true,
+    "bnb_4bit_quant_type": "nf4",
+    "bnb_4bit_compute_dtype": "float16",
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"]
+  },
+  "prompting": {
+    "use_lecture": true,
+    "use_hint": true,
+    "lecture_max_chars": 1200,
+    "hint_max_chars": 600,
+    "answer_format": "letter_only"
+  },
+  "evaluation": {
+    "strict_choice_masking": true,
+    "scoring_mode": "choice_letter_logprob",
+    "report_topk": [1, 2],
+    "early_stopping_patience": 2
+  },
+  "ablation_axes": {
+    "prompt_variants": [
+      "question+choices",
+      "question+hint+choices",
+      "question+lecture+hint+choices"
+    ],
+    "lora_r": [8, 16],
+    "learning_rate": [0.0001, 0.0002],
+    "num_epochs": [2, 3, 5],
+    "seed": [42, 3407]
+  }
+}
