@@ -1,3 +1,7 @@
 input/
 competition-materials/
 images/
+
+*.zip
+*.csv
+checkpoints/

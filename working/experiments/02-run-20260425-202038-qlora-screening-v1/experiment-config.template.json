@@ -1,0 +1,52 @@
+{
+  "run_name": "qlora-screening-v1",
+  "seed": 42,
+  "paths": {
+    "data_dir": "/kaggle/input/pixels-to-predictions",
+    "output_dir": "/kaggle/working"
+  },
+  "mode": {
+    "do_train": true,
+    "do_val_eval": true,
+    "do_test_inference": false
+  },
+  "model": {
+    "model_id": "HuggingFaceTB/SmolVLM-500M-Instruct",
+    "img_size": 224,
+    "max_new_tokens": 8
+  },
+  "prompting": {
+    "variant": "question+lecture+hint+choices",
+    "use_hint": true,
+    "use_lecture": true,
+    "lecture_max_chars": 1200,
+    "hint_max_chars": 600,
+    "answer_format": "letter_only"
+  },
+  "training": {
+    "num_epochs": 2,
+    "learning_rate": 0.0002,
+    "weight_decay": 0.01,
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "warmup_ratio": 0.05,
+    "max_grad_norm": 1.0,
+    "logging_steps": 20,
+    "save_strategy": "epoch",
+    "evaluation_strategy": "no"
+  },
+  "qlora": {
+    "load_in_4bit": true,
+    "bnb_4bit_quant_type": "nf4",
+    "bnb_4bit_compute_dtype": "float16",
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"],
+    "max_trainable_params": 5000000
+  },
+  "screening": {
+    "max_val_samples": null,
+    "verbose_every": 10
+  }
+}
