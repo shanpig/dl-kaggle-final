@@ -1,0 +1,46 @@
+\relax 
+\bibstyle{acl_natbib}
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Dataset}{1}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Dataset Alignment}{1}{subsection.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Comparative analysis of textual distributions between the training and testing datasets.}}{2}{figure.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:train_vs_test-1}{{1}{2}{Comparative analysis of textual distributions between the training and testing datasets}{figure.caption.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Comparative analysis of structural distributions between the training and testing datasets.}}{2}{figure.caption.2}\protected@file@percent }
+\newlabel{fig:train_vs_test-2}{{2}{2}{Comparative analysis of structural distributions between the training and testing datasets}{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Preprocessing and Optimization Pipeline}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Structural representation of the training SVGs in tokens before and after minimization and preprocessing pipeline.}}{2}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:minimization-2}{{3}{2}{Structural representation of the training SVGs in tokens before and after minimization and preprocessing pipeline}{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Structural representation of the training SVGs in characters before and after minimization and preprocessing pipeline.}}{3}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:minimization-1}{{4}{3}{Structural representation of the training SVGs in characters before and after minimization and preprocessing pipeline}{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Visual and code representation of an SVG before and after minimization and preprocessing pipeline.}}{3}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:minimization-3}{{5}{3}{Visual and code representation of an SVG before and after minimization and preprocessing pipeline}{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Model Description}{3}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experimentation}{3}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Preprocessing-Oriented Ablation Study}{3}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Main Training Progression}{4}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Prompt Design Analysis}{5}{subsection.4.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Qualitative prompt-analysis examples provided as a separate exploratory study. The examples suggest that prompt restriction can help simple geometric cases while remaining insufficient for more complex semantic compositions.}}{5}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:prompt-analysis}{{6}{5}{Qualitative prompt-analysis examples provided as a separate exploratory study. The examples suggest that prompt restriction can help simple geometric cases while remaining insufficient for more complex semantic compositions}{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Results}{5}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{6}{section.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Short baseline system prompt used in the starter and early 2GPU experiments.}}{7}{table.caption.7}\protected@file@percent }
+\newlabel{tab:prompt-base}{{1}{7}{Short baseline system prompt used in the starter and early 2GPU experiments}{table.caption.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces System prompt used in the \texttt  {2gpu-version-batch2-with-prompt} experiment.}}{7}{table.caption.8}\protected@file@percent }
+\newlabel{tab:prompt}{{2}{7}{System prompt used in the \texttt {2gpu-version-batch2-with-prompt} experiment}{table.caption.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Designer-oriented system prompt used in the final 3072-token AMD experiments.}}{7}{table.caption.9}\protected@file@percent }
+\newlabel{tab:prompt-designer}{{3}{7}{Designer-oriented system prompt used in the final 3072-token AMD experiments}{table.caption.9}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Isolated preprocessing-oriented ablation study. Prompt, sample count, sequence length, LoRA adapter configuration, and preprocessing strategy were varied to evaluate their effect on Kaggle public score. All runs used Qwen2.5-3B-Instruct on Kaggle NVIDIA T4 $\times $ 2 with \texttt  {per\_device\_train\_batch\_size}=1 and \texttt  {gradient\_accumulation\_steps}=16.}}{8}{table.caption.10}\protected@file@percent }
+\newlabel{tab:preprocessing_ablation}{{4}{8}{Isolated preprocessing-oriented ablation study. Prompt, sample count, sequence length, LoRA adapter configuration, and preprocessing strategy were varied to evaluate their effect on Kaggle public score. All runs used Qwen2.5-3B-Instruct on Kaggle NVIDIA T4 $\times $ 2 with \texttt {per\_device\_train\_batch\_size}=1 and \texttt {gradient\_accumulation\_steps}=16}{table.caption.10}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Summary of experiment configurations, training platforms, and Kaggle competition submission scores. Here, $r$ denotes LoRA rank, $\alpha $ denotes LoRA scaling factor, LR denotes learning rate, Train BS denotes per-device training batch size, Eval BS denotes per-device evaluation batch size, Grad Accum denotes gradient accumulation steps, and Target Samples denotes the number of training examples used in that experiment. Score (Private) and Score (Public) refer to the private and public leaderboard scores reported by Kaggle for each submission.}}{8}{table.caption.11}\protected@file@percent }
+\newlabel{tab:experiments}{{5}{8}{Summary of experiment configurations, training platforms, and Kaggle competition submission scores. Here, $r$ denotes LoRA rank, $\alpha $ denotes LoRA scaling factor, LR denotes learning rate, Train BS denotes per-device training batch size, Eval BS denotes per-device evaluation batch size, Grad Accum denotes gradient accumulation steps, and Target Samples denotes the number of training examples used in that experiment. Score (Private) and Score (Public) refer to the private and public leaderboard scores reported by Kaggle for each submission}{table.caption.11}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Prompt A used in the preprocessing-oriented ablation study.}}{8}{table.caption.12}\protected@file@percent }
+\newlabel{tab:ablation-prompt-a}{{6}{8}{Prompt A used in the preprocessing-oriented ablation study}{table.caption.12}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Prompt B used in the preprocessing-oriented ablation study.}}{9}{table.caption.13}\protected@file@percent }
+\newlabel{tab:ablation-prompt-b}{{7}{9}{Prompt B used in the preprocessing-oriented ablation study}{table.caption.13}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Prompt C used in the preprocessing-oriented ablation study.}}{9}{table.caption.14}\protected@file@percent }
+\newlabel{tab:ablation-prompt-c}{{8}{9}{Prompt C used in the preprocessing-oriented ablation study}{table.caption.14}{}}
+\gdef \@abspage@last{9}

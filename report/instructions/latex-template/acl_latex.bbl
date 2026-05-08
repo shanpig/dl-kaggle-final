@@ -1,0 +1,29 @@
+\begin{thebibliography}{4}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{AI(2024)}]{unsloth}
+Unsloth AI. 2024.
+\newblock Unsloth.
+\newblock \url{https://github.com/unslothai/unsloth}.
+\newblock GitHub repository.
+
+\bibitem[{Hu et~al.(2022)Hu, Shen, Wallis, Allen-Zhu, Li, Wang, Wang, and
+  Chen}]{hu2022lora}
+Edward~J. Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean
+  Wang, Lu~Wang, and Weizhu Chen. 2022.
+\newblock \href {https://openreview.net/forum?id=nZeVKeeFYf9} {Lora: Low-rank
+  adaptation of large language models}.
+\newblock In \emph{International Conference on Learning Representations}.
+
+\bibitem[{Team(2024{\natexlab{a}})}]{qwen2_5_coder}
+Qwen Team. 2024{\natexlab{a}}.
+\newblock \href {https://arxiv.org/abs/2409.12186} {Qwen2.5-coder technical
+  report}.
+\newblock \emph{Preprint}, arXiv:2409.12186.
+
+\bibitem[{Team(2024{\natexlab{b}})}]{qwen2_5}
+Qwen Team. 2024{\natexlab{b}}.
+\newblock \href {https://arxiv.org/abs/2412.15115} {Qwen2.5 technical report}.
+\newblock \emph{Preprint}, arXiv:2412.15115.
+
+\end{thebibliography}
