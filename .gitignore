@@ -2,7 +2,7 @@ input/
 competition-materials/
 images/
 
-*.zip
+working/*.zip
 *.csv
 checkpoints/
 left/
