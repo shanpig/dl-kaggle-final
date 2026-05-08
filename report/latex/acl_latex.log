@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.4)  8 MAY 2026 14:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.4)  8 MAY 2026 14:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -557,8 +557,10 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 4.
 ) (./experiment_registry_full_table.tex
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 4.
+Overfull \hbox (19.24396pt too wide) in paragraph at lines 5--45
+ [][] 
+ []
+
 )
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <10.95> on input line 106.
@@ -604,6 +606,26 @@ Underfull \hbox (badness 10000) in paragraph at lines 113--114
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+[]\T1/ptm/m/n/10.95 (+20) Left branch best LoRA weights
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+\T1/ptm/m/n/10.95 (+20) (seed42): [][]$\T1/zi4/m/n/10.95 https : / / github .
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+\T1/zi4/m/n/10.95 com / lefteriskomvopoulos /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+\T1/zi4/m/n/10.95 PixelsToPredictions / blob / main /
+ []
+
+
 
 
 
@@ -618,20 +640,20 @@ Package rerunfilecheck Info: File `acl_latex.out' has not changed.
 (rerunfilecheck)             Checksum: F5DDFF57783197B1FD27FE42B0BE51BC;1472.
  ) 
 Here is how much of TeX's memory you used:
- 13839 strings out of 473190
- 222425 string characters out of 5715801
- 685076 words of memory out of 5000000
- 36729 multiletter control sequences out of 15000+600000
- 597488 words of font info for 185 fonts, out of 8000000 for 9000
+ 13831 strings out of 473190
+ 222282 string characters out of 5715801
+ 706158 words of memory out of 5000000
+ 36722 multiletter control sequences out of 15000+600000
+ 597382 words of font info for 184 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  90i,10n,93p,1006b,527s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/inconsolata/Inconsolat
 a-zi4r.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb
 ></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on acl_latex.pdf (4 pages, 65578 bytes).
+Output written on acl_latex.pdf (4 pages, 66566 bytes).
 PDF statistics:
- 104 PDF objects out of 1000 (max. 8388607)
- 91 compressed objects within 1 object stream
+ 108 PDF objects out of 1000 (max. 8388607)
+ 95 compressed objects within 1 object stream
  19 named destinations out of 1000 (max. 500000)
- 44113 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 43601 words of extra memory for PDF output out of 51595 (max. 10000000)
 

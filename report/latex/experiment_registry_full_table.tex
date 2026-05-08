@@ -1,46 +1,47 @@
 \begin{table*}[p]
 \centering
-\scriptsize
-\begin{tabular}{l l l l p{4.8cm} c c l c}
+\tiny
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{l l l l p{3.6cm} c c c c c c c c c c l c}
 \hline
-Exp & Owner & Phase & Parent & LoRA targets & Img & Runtime(min) & Status & Score \\
+Exp & Owner & Phase & Parent & LoRA targets & r & alpha & dropout & Trainable & LR & Epochs & B & GA & Img & Runtime(min) & Status & Score \\
 \hline
-E01 & you & baseline & NA & NA & NA & NA & success & 0.65392 \\
-E02 & you & qlora-setup & E01 & q/k/v/o & NA & NA & success & NA \\
-E03 & you & ablation & E02 & q/k/v/o & NA & NA & pending & NA \\
-E04 & you & qlora-setup & E02 & q/k/v/o & 192 & 27.6 & success & NA \\
-E05 & you & ablation & E04 & q/k/v/o & 192 & 111.2 & success & NA \\
-E06 & you & ablation & E05 & q/k/v/o & 192 & 215.9 & success & NA \\
-E07 & you & ablation & E05 & q/k/v/o & 192 & 112.9 & success & NA \\
-E08 & you & ablation & E07 & q/k/v/o & 192 & 108.5 & success & NA \\
-E09 & you & ablation & E08 & q/k/v/o & 192 & 113.2 & cuda-error & NA \\
-E10 & you & ablation & E08 & q/k/v/o & 192 & 109.7 & success & NA \\
-E11 & you & submission & E07 & q/k/v/o & 192 & 331.1 & success & 0.47283 \\
-E12 & you & ablation & E07 & q/k/v/o & 192 & 109.5 & success & NA \\
-E13 & you & submission & E12 & q/k/v/o & 192 & 330.8 & success & 0.63983 \\
-E14 & you & ablation & E13 & q/k/v/o & 192 & 344.4 & success & NA \\
-E15 & you & ablation & E14 & q/k/v/o & 192 & 347.2 & success & NA \\
-E16 & you & ablation & E14 & q/k/v/o+gate/up/down & 192 & 357.4 & success & NA \\
-E17 & you & submission & E16 & q/k/v/o+gate/up/down & 192 & 363.4 & success & 0.69014 \\
-E18 & you & inference & E17 & q/k/v/o+gate/up/down & 192 & NA & stopped & NA \\
-E19 & you & ablation & E17 & q/k/v/o+gate/up/down & 192 & 706.0 & timeout & NA \\
-E20 & you & submission & E19 & q/k/v/o+gate/up/down & 192 & NA & success & 0.69818 \\
-E21 & you & submission & E20 & q/k/v/o+gate/up/down & 160 & 720.0 & timeout & NA \\
-E22 & you & submission & E20 & q/k/v/o+gate/up/down & 192 & NA & success & NA \\
-E23 & you & submission & E20 & q/k/v/o+gate/up/down & 160 & 475.6 & success & 0.70623 \\
-E24 & you & continuation & E23 & q/k/v/o+gate/up/down & 160 & 169.9 & success & 0.59758 \\
-E25 & you & submission & E23 & q/v/o & 192 & 431.4 & success & 0.65593 \\
-L02 & left & ablation & NA & q/k/v/o & 224 & NA & success & 0.61971 \\
-L03 & left & ablation & L02 & q/k/v/o+gate/up/down & 224 & NA & success & 0.74446 \\
-L04 & left & ablation & L03 & q/k/v/o+gate/up/down & 224 & NA & success & 0.64989 \\
-L05 & left & ablation & L04 & q/k/v/o+gate/up/down & 224 & NA & success & 0.75653 \\
-L06 & left & ablation & L05 & q/k/v/o+gate/up/down & 384 & NA & success & 0.78470 \\
-L07 & left & ablation & L06 & q/k/v/o+gate/up/down+out\_proj & 384 & NA & success & 0.76659 \\
-L08 & left & submission & L06 & q/k/v/o+gate/up/down & 384 & NA & success & 0.81488 \\
-L09 & left & submission & L08 & q/k/v/o+gate/up/down & 384 & NA & success & 0.80482 \\
-L10 & left & submission & L08 & q/k/v/o+gate/up/down & 1024 & NA & success & 0.84507 \\
+E01 & you & baseline & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & success & 0.65392 \\
+E02 & you & qlora-setup & E01 & q/k/v/o & 8 & 16 & 0.05 & 2080768 & 2e-4 & 2 & 1 & 8 & NA & NA & success & NA \\
+E03 & you & ablation & E02 & q/k/v/o & 8 & 16 & 0.05 & 2080768 & 2e-4 & 1 & 1 & 8 & NA & NA & pending & NA \\
+E04 & you & qlora-setup & E02 & q/k/v/o & 8 & 16 & 0.05 & 2080768 & 2e-4 & 1 & 1 & 16 & 192 & 27.6 & success & NA \\
+E05 & you & ablation & E04 & q/k/v/o & 8 & 16 & 0.05 & 2080768 & 1e-4 & 1 & 1 & 16 & 192 & 111.2 & success & NA \\
+E06 & you & ablation & E05 & q/k/v/o & 8 & 16 & 0.05 & 2080768 & 2e-4 & 1 & 1 & 16 & 192 & 215.9 & success & NA \\
+E07 & you & ablation & E05 & q/k/v/o & 8 & 16 & 0.05 & 2080768 & 1e-4 & 1 & 1 & 16 & 192 & 112.9 & success & NA \\
+E08 & you & ablation & E07 & q/k/v/o & 8 & 16 & 0.05 & 2080768 & 1e-4 & 1 & 1 & 16 & 192 & 108.5 & success & NA \\
+E09 & you & ablation & E08 & q/k/v/o & 8 & 16 & 0.05 & 2080768 & 1e-4 & 1 & 1 & 16 & 192 & 113.2 & cuda-error & NA \\
+E10 & you & ablation & E08 & q/k/v/o & 8 & 16 & 0.05 & 2080768 & 1e-4 & 1 & 1 & 16 & 192 & 109.7 & success & NA \\
+E11 & you & submission & E07 & q/k/v/o & 8 & 16 & 0.05 & 2080768 & 1e-4 & 1 & 1 & 16 & 192 & 331.1 & success & 0.47283 \\
+E12 & you & ablation & E07 & q/k/v/o & 8 & 16 & 0.05 & 2080768 & 1e-4 & 1 & 1 & 16 & 192 & 109.5 & success & NA \\
+E13 & you & submission & E12 & q/k/v/o & 8 & 16 & 0.05 & 2080768 & 1e-4 & 1 & 1 & 16 & 192 & 330.8 & success & 0.63983 \\
+E14 & you & ablation & E13 & q/k/v/o & 8 & 16 & 0.05 & 2080768 & 1e-4 & 1 & 1 & 16 & 192 & 344.4 & success & NA \\
+E15 & you & ablation & E14 & q/k/v/o & 8 & 16 & 0.05 & 2080768 & 1e-4 & 1 & 1 & 16 & 192 & 347.2 & success & NA \\
+E16 & you & ablation & E14 & q/k/v/o+gate/up/down & NA & NA & 0.05 & 4980000 & 1e-4 & 1 & 1 & 16 & 192 & 357.4 & success & NA \\
+E17 & you & submission & E16 & q/k/v/o+gate/up/down & NA & NA & 0.05 & 4980000 & 1e-4 & 1 & 1 & 16 & 192 & 363.4 & success & 0.69014 \\
+E18 & you & inference & E17 & q/k/v/o+gate/up/down & NA & NA & 0.05 & 4980000 & 1e-4 & 0 & 1 & 16 & 192 & NA & stopped & NA \\
+E19 & you & ablation & E17 & q/k/v/o+gate/up/down & NA & NA & 0.05 & 4980000 & 8e-5 & 2 & 1 & 16 & 192 & 706.0 & timeout & NA \\
+E20 & you & submission & E19 & q/k/v/o+gate/up/down & NA & NA & 0.05 & 4980000 & 8e-5 & 0 & 1 & 16 & 192 & NA & success & 0.69818 \\
+E21 & you & submission & E20 & q/k/v/o+gate/up/down & NA & NA & 0.05 & 4980000 & 1e-4 & 1 & 1 & 16 & 160 & 720.0 & timeout & NA \\
+E22 & you & submission & E20 & q/k/v/o+gate/up/down & NA & NA & 0.05 & 4980000 & 8e-5 & 0 & 1 & 16 & 192 & NA & success & NA \\
+E23 & you & submission & E20 & q/k/v/o+gate/up/down & NA & NA & 0.05 & 4980000 & 1e-4 & 1 & 1 & 16 & 160 & 475.6 & success & 0.70623 \\
+E24 & you & continuation & E23 & q/k/v/o+gate/up/down & NA & NA & 0.05 & 4980000 & 5e-5 & 0.35 & 1 & 16 & 160 & 169.9 & success & 0.59758 \\
+E25 & you & submission & E23 & q/v/o & 8 & 16 & 0.05 & 3250000 & 8e-5 & 1 & 1 & 16 & 192 & 431.4 & success & 0.65593 \\
+L02 & left & ablation & NA & q/k/v/o & 16 & 32 & 0.05 & NA & 2e-4 & 3 & 2 & 8 & 224 & NA & success & 0.61971 \\
+L03 & left & ablation & L02 & q/k/v/o+gate/up/down & 8 & 16 & 0.05 & NA & 1e-4 & 2 & 2 & 8 & 224 & NA & success & 0.74446 \\
+L04 & left & ablation & L03 & q/k/v/o+gate/up/down & 8 & 16 & 0.05 & NA & 1e-4 & 2 & 2 & 8 & 224 & NA & success & 0.64989 \\
+L05 & left & ablation & L04 & q/k/v/o+gate/up/down & 8 & 16 & 0.05 & NA & 1e-4 & 2 & 2 & 8 & 224 & NA & success & 0.75653 \\
+L06 & left & ablation & L05 & q/k/v/o+gate/up/down & 8 & 16 & 0.05 & NA & 1e-4 & 3 & 2 & 8 & 384 & NA & success & 0.78470 \\
+L07 & left & ablation & L06 & q/k/v/o+gate/up/down+out\_proj & 8 & 16 & 0.05 & 4930000 & 1e-4 & 3 & 2 & 8 & 384 & NA & success & 0.76659 \\
+L08 & left & submission & L06 & q/k/v/o+gate/up/down & 8 & 16 & 0.05 & NA & 1e-4 & 3 & 1 & 16 & 384 & NA & success & 0.81488 \\
+L09 & left & submission & L08 & q/k/v/o+gate/up/down & 8 & 16 & 0.05 & NA & 1e-4 & 3 & 1 & 16 & 384 & NA & success & 0.80482 \\
+L10 & left & submission & L08 & q/k/v/o+gate/up/down & 8 & 16 & 0.05 & NA & 1e-4 & 3 & 1 & 16 & 1024 & NA & success & 0.84507 \\
 \hline
 \end{tabular}
-\caption{Full experiment registry (all runs from both branches).}
+\caption{Full experiment registry (all runs from both branches), including hyperparameter settings and trainable-parameter counts where available.}
 \label{tab:full-registry}
 \end{table*}
