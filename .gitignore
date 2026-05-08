@@ -6,3 +6,7 @@ images/
 *.csv
 checkpoints/
 left/
+left/working/experiments/**/results/
+working/experiments/**/best_adapter/
+working/experiments/**/checkpoints/
+working/experiments/**/*.zip
