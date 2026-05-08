@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.4)  8 MAY 2026 14:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.4)  8 MAY 2026 15:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -491,8 +491,6 @@ Underfull \hbox (badness 1024) in paragraph at lines 27--28
 \T1/ptm/m/n/10 (+20) prompt/context vari-ants, answer-token-only
  []
 
-
-
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
 (Font)              scaled to size 10.95pt on input line 38.
 
@@ -510,6 +508,8 @@ Underfull \hbox (badness 2393) in paragraph at lines 38--39
 \T1/ptm/m/n/10.95 (+20) fields in-clude \T1/zi4/m/n/10.95 hint\T1/ptm/m/n/10.95
  (+20) , \T1/zi4/m/n/10.95 lecture\T1/ptm/m/n/10.95 (+20) , and meta-data
  []
+
+
 
 
 Overfull \hbox (4.50769pt too wide) in paragraph at lines 43--44
@@ -557,67 +557,55 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 4.
 ) (./experiment_registry_full_table.tex
-Overfull \hbox (19.24396pt too wide) in paragraph at lines 5--45
+Overfull \hbox (36.5899pt too wide) in paragraph at lines 5--45
  [][] 
  []
 
 )
+
+[2]
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <10.95> on input line 106.
 
-Underfull \hbox (badness 2409) in paragraph at lines 106--107
-[]\T1/ptm/m/n/10.95 (+20) Che Hung Liao: [][]$\T1/zi4/m/n/10.95 https : / / git
-hub . com /
- []
-
-
-
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 107--108
-[]\T1/ptm/m/n/10.95 (+20) Elefterios Komvopou-los: [][]$\T1/zi4/m/n/10.95 https
- :
+Underfull \hbox (badness 10000) in paragraph at lines 106--107
+[]\T1/ptm/m/n/10.95 (+20) Repository: [][]$\T1/zi4/m/n/10.95 https : / / github
+ . com /
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 107--108
-\T1/zi4/m/n/10.95 / / github . com / lefteriskomvopoulos /
+[]\T1/ptm/m/n/10.95 (+20) Model weights (Exp17 adapter):
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 112--113
-[]\T1/ptm/m/n/10.95 (+20) Exp17 adapter: [][]$\T1/zi4/m/n/10.95 https : / / www
- .
+Underfull \hbox (badness 10000) in paragraph at lines 107--108
+[][]$\T1/zi4/m/n/10.95 https : / / www . kaggle . com / models /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 112--113
-\T1/zi4/m/n/10.95 kaggle . com / models / chehungliao /
+Underfull \hbox (badness 10000) in paragraph at lines 108--109
+[]\T1/ptm/m/n/10.95 (+20) Model weights (Exp23 adapter):
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 108--109
+[][]$\T1/zi4/m/n/10.95 https : / / www . kaggle . com / models /
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 113--114
-[]\T1/ptm/m/n/10.95 (+20) Exp23 adapter: [][]$\T1/zi4/m/n/10.95 https : / / www
+[]\T1/ptm/m/n/10.95 (+20) Repository: [][]$\T1/zi4/m/n/10.95 https : / / github
  .
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 113--114
-\T1/zi4/m/n/10.95 kaggle . com / models / chehungliao /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 114--115
-[]\T1/ptm/m/n/10.95 (+20) Left branch best LoRA weights
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 114--115
-\T1/ptm/m/n/10.95 (+20) (seed42): [][]$\T1/zi4/m/n/10.95 https : / / github .
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 114--115
 \T1/zi4/m/n/10.95 com / lefteriskomvopoulos /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+\T1/zi4/m/n/10.95 / / github . com / lefteriskomvopoulos /
  []
 
 
@@ -637,23 +625,23 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `acl_latex.out' has not changed.
-(rerunfilecheck)             Checksum: F5DDFF57783197B1FD27FE42B0BE51BC;1472.
+(rerunfilecheck)             Checksum: 9253E63340B7DB7E30D202C8392A4E85;1497.
  ) 
 Here is how much of TeX's memory you used:
  13831 strings out of 473190
  222282 string characters out of 5715801
- 706158 words of memory out of 5000000
+ 707158 words of memory out of 5000000
  36722 multiletter control sequences out of 15000+600000
  597382 words of font info for 184 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,10n,93p,1006b,527s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,10n,93p,1006b,526s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/inconsolata/Inconsolat
 a-zi4r.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb
 ></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on acl_latex.pdf (4 pages, 66566 bytes).
+Output written on acl_latex.pdf (4 pages, 66177 bytes).
 PDF statistics:
- 108 PDF objects out of 1000 (max. 8388607)
- 95 compressed objects within 1 object stream
+ 106 PDF objects out of 1000 (max. 8388607)
+ 93 compressed objects within 1 object stream
  19 named destinations out of 1000 (max. 500000)
  43601 words of extra memory for PDF output out of 51595 (max. 10000000)
 

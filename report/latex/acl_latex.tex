@@ -24,7 +24,7 @@
 \maketitle
 
 \begin{abstract}
-We study parameter-efficient fine-tuning of \texttt{HuggingFaceTB/SmolVLM-500M-Instruct} for a multimodal science multiple-choice question answering task with strict course constraints: no external data, Kaggle/Colab-class compute, and fewer than five million trainable parameters. We ran an iterative experiment program with both validation-first screening and leaderboard-facing submission runs, covering prompt/context variants, answer-token-only objective, expanded LoRA target modules, inference scoring strategies, train+val final fitting, and timeout-aware execution plans. Our best score on the public leaderboard is 0.84507 from a teammate branch, and 0.70623 from our main branch. We provide a consolidated analysis of what worked, what failed, and why, with emphasis on optimization under practical runtime limits.
+We study parameter-efficient fine-tuning of \texttt{HuggingFaceTB/SmolVLM-500M-Instruct} for a multimodal science multiple-choice question answering task with strict course constraints: no external data, Kaggle/Colab-class compute, and fewer than five million trainable parameters. We ran an iterative experiment program with both validation-first screening and leaderboard-facing submission runs, covering prompt/context variants, answer-token-only objective, expanded LoRA target modules, inference scoring strategies, train+val final fitting, and timeout-aware execution plans. Our best score on the public leaderboard is 0.84507 from the Komvopoulos track, and 0.70623 from the Liao track. We provide a consolidated analysis of what worked, what failed, and why, with emphasis on optimization under practical runtime limits.
 \end{abstract}
 
 \section{Introduction}
@@ -32,7 +32,7 @@ This project targets multimodal ScienceQA-style multiple-choice reasoning from i
 
 Our objective was twofold: (1) maximize leaderboard accuracy under strict course constraints, and (2) produce a reproducible record of how architecture- and pipeline-level decisions affected outcomes. Instead of a single monolithic training run, we used staged ablations and promotion gates (validation-first, then submission-mode) to manage risk and compute.
 
-We summarize two complementary experiment tracks. The first track (left branch) emphasizes systematic architecture/prompt/image-processing evolution and reaches 0.84507 public score. The second track (main branch) emphasizes robust Kaggle execution, timeout-aware submission workflows, and progressive improvements from baseline to 0.70623.
+We summarize two complementary experiment tracks. The Komvopoulos track emphasizes systematic architecture/prompt/image-processing evolution and reaches 0.84507 public score. The Liao track emphasizes robust Kaggle execution, timeout-aware submission workflows, and progressive improvements from baseline to 0.70623.
 
 \section{Dataset}
 The competition dataset contains train/validation/test CSV files with image-linked science QA samples. Key fields include \texttt{id}, \texttt{image\_path}, \texttt{question}, \texttt{choices}, \texttt{num\_choices}, and \texttt{answer} for labeled splits. Additional context fields include \texttt{hint}, \texttt{lecture}, and metadata columns such as \texttt{subject}, \texttt{grade}, and \texttt{topic}.
@@ -51,8 +51,8 @@ Across runs, we explored two major adapter target regimes:
 To stay under budget safely, we used cap checks and (in later versions) candidate-rank selection logic. Most stable high-performing runs used \texttt{r=8, alpha=16} with expanded module targets.
 
 \section{Experimentation}
-\subsection{Main branch progression (Che Hung Liao)}
-Our main branch started from a Kaggle-friendly starter notebook, then iterated through submission-safe experiment folders with strict tracking. The strongest improvements came from:
+\subsection{Liao Track Progression (Che Hung Liao)}
+The Liao track started from a Kaggle-friendly starter notebook, then iterated through submission-safe experiment folders with strict tracking. The strongest improvements came from:
 \begin{itemize}
   \item Full-context prompting (lecture + hint enabled) in screening runs.
   \item Cap-safe high-capacity LoRA module expansion.
@@ -61,8 +61,8 @@ Our main branch started from a Kaggle-friendly starter notebook, then iterated t
 
 We also tested answer-token-only supervision, prompt metadata injection, continuation fine-tuning from prior adapters, and timeout-safe inference-only fallback runs. Multiple experiments timed out near Kaggle limits; this heavily shaped final workflow design.
 
-\subsection{Left branch progression (Elefterios Komvopoulos)}
-The left branch executed a deeper versioned sequence (v2--v10) and identified several high-impact decisions:
+\subsection{Komvopoulos Track Progression (Elefterios Komvopoulos)}
+The Komvopoulos track executed a deeper versioned sequence (v2--v10) and identified several high-impact decisions:
 \begin{itemize}
   \item Lowering LR and expanding LoRA targets to MLP layers improved generalization.
   \item Training with leaked \texttt{solution} reasoning caused distribution-shift regression.
@@ -87,10 +87,10 @@ To make cross-branch comparison symmetric, we consolidated both tracks into a si
 \input{experiment_registry_table}
 
 \paragraph{Key findings.}
-(1) Training loss alone was not a reliable model-selection metric; several lower-loss runs generalized worse. (2) Prompt-template and inference-scoring alignment mattered substantially. (3) Vision-side preprocessing and effective visual token utilization were decisive in the highest-performing track (left branch L10, 0.84507). (4) Under tight runtime budgets, operational reliability (finishing runs and producing submissions) was itself a major optimization axis in the main branch (E20/E23).
+(1) Training loss alone was not a reliable model-selection metric; several lower-loss runs generalized worse. (2) Prompt-template and inference-scoring alignment mattered substantially. (3) Vision-side preprocessing and effective visual token utilization were decisive in the highest-performing track (Komvopoulos track L10, 0.84507). (4) Under tight runtime budgets, operational reliability (finishing runs and producing submissions) was itself a major optimization axis in the Liao track (E20/E23).
 
 \section{Conclusion}
-We presented a constrained multimodal fine-tuning study of SmolVLM-500M-Instruct under a strict 5M trainable-parameter cap and limited Kaggle runtime budget. Across two coordinated experiment tracks, we observed that robust gains came from a combination of cap-safe adapter design, context/prompt discipline, stable per-choice scoring, and (in the strongest branch) improved image-processing strategy with native template alignment and TTA. Our best achieved public scores were 0.70623 (main branch) and 0.84507 (left branch).
+We presented a constrained multimodal fine-tuning study of SmolVLM-500M-Instruct under a strict 5M trainable-parameter cap and limited Kaggle runtime budget. Across two coordinated experiment tracks, we observed that robust gains came from a combination of cap-safe adapter design, context/prompt discipline, stable per-choice scoring, and (in the strongest track) improved image-processing strategy with native template alignment and TTA. Our best achieved public scores were 0.70623 (Liao track) and 0.84507 (Komvopoulos track).
 
 For future work, we would prioritize controlled multi-seed ensembling under fixed compute budget, formalized calibration for choice probabilities, and a unified high-resolution visual preprocessing path merged with the most stable train+val submission workflow.
 
@@ -101,17 +101,17 @@ For reproducibility and auditability, we include the complete cross-branch regis
 \input{experiment_registry_full_table}
 
 \section*{Resources and Disclosure}
-\textbf{Code repositories.}
+\textbf{Che Hung Liao resources.}
 \begin{itemize}
-  \item Che Hung Liao: \url{https://github.com/shanpig/dl-kaggle-final}
-  \item Elefterios Komvopoulos: \url{https://github.com/lefteriskomvopoulos/PixelsToPredictions}
+  \item Repository: \url{https://github.com/shanpig/dl-kaggle-final}
+  \item Model weights (Exp17 adapter): \url{https://www.kaggle.com/models/chehungliao/exp17-best-adapter}
+  \item Model weights (Exp23 adapter): \url{https://www.kaggle.com/models/chehungliao/exp23-best-adapter}
 \end{itemize}
 
-\textbf{Model weights.}
+\noindent\textbf{Elefterios Komvopoulos resources.}
 \begin{itemize}
-  \item Exp17 adapter: \url{https://www.kaggle.com/models/chehungliao/exp17-best-adapter}
-  \item Exp23 adapter: \url{https://www.kaggle.com/models/chehungliao/exp23-best-adapter}
-  \item Left branch best LoRA weights (seed42): \url{https://github.com/lefteriskomvopoulos/PixelsToPredictions/blob/main/lora-final-seed42.zip}
+  \item Repository: \url{https://github.com/lefteriskomvopoulos/PixelsToPredictions}
+  \item Model weights (best LoRA, seed42): \url{https://github.com/lefteriskomvopoulos/PixelsToPredictions/blob/main/lora-final-seed42.zip}
 \end{itemize}
 
 \textbf{AI tooling disclosure.} We used LLM assistants (including ChatGPT/Codex-style tools) for coding support, debugging, experiment tracking, and report drafting/editing. Final experiment decisions, execution, and result interpretation were performed by the authors.
