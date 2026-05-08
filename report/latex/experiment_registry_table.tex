@@ -1,0 +1,23 @@
+\begin{table*}[t]
+\centering
+\small
+\begin{tabular}{l l l l l l l l}
+\hline
+Exp & Owner & Phase & Parent & LoRA Targets & Img Size & Runtime (min) & Public Score \\
+\hline
+E01 & You & baseline & -- & -- & -- & -- & 0.65392 \\
+E11 & You & submission & E07 & q/k/v/o & 192 & 331.1 & 0.47283 \\
+E13 & You & submission & E12 & q/k/v/o & 192 & 330.8 & 0.63983 \\
+E17 & You & submission & E16 & q/k/v/o+gate/up/down & 192 & 363.4 & 0.69014 \\
+E20 & You & submission & E19 & q/k/v/o+gate/up/down & 192 & -- & 0.69818 \\
+E23 & You & submission & E20 & q/k/v/o+gate/up/down & 160 & 475.6 & 0.70623 \\
+E24 & You & continuation & E23 & q/k/v/o+gate/up/down & 160 & 169.9 & 0.59758 \\
+E25 & You & submission & E23 & q/v/o & 192 & 431.4 & 0.65593 \\
+L08 & Left & submission & L06 & q/k/v/o+gate/up/down & 384 & -- & 0.81488 \\
+L09 & Left & submission & L08 & q/k/v/o+gate/up/down & 384 & -- & 0.80482 \\
+L10 & Left & submission & L08 & q/k/v/o+gate/up/down & 1024 & -- & \textbf{0.84507} \\
+\hline
+\end{tabular}
+\caption{Unified experiment registry (selected submission/decision runs). Full registry is provided in \texttt{report/experiment\_registry.csv}.}
+\label{tab:unified-experiments}
+\end{table*}
