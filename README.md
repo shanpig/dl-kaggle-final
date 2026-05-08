@@ -2,6 +2,8 @@
 
 This repository contains our experiments for fine-tuning and evaluating `HuggingFaceTB/SmolVLM-500M-Instruct` on the course Kaggle multimodal science QA competition.
 
+Competition link: https://www.kaggle.com/competitions/pixels-to-predictions
+
 ## Prerequisites
 
 - Python 3.10+
