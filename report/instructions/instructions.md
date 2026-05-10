@@ -24,9 +24,9 @@ Our github repos are:
   - Model weights:
     - exp17: https://www.kaggle.com/models/chehungliao/exp17-best-adapter
     - exp23: https://www.kaggle.com/models/chehungliao/exp23-best-adapter
-- From Elefteris Komvopoulos: https://github.com/lefteriskomvopoulos/PixelsToPredictions
+- From Eleftherios Komvopoulos: https://github.com/lefteriskomvopoulos/PixelsToPredictions
   - Model weights:
-    - TBA
+    - exp 10: https://github.com/lefteriskomvopoulos/PixelsToPredictions/blob/main/lora-final-seed42.zip
 
 ## Comments of missing points from midterm (need to address more in the content of the final report):
 

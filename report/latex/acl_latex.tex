@@ -6,114 +6,160 @@
 \usepackage[utf8]{inputenc}
 \usepackage{microtype}
 \usepackage{inconsolata}
-\usepackage{booktabs}
-\usepackage{array}
-\usepackage{url}
 
-\title{Fine-Tuning SmolVLM-500M-Instruct for Multimodal ScienceQA Under a 5M Trainable-Parameter Constraint}
+\title{A Systematic Study of Parameter-Efficient Adaptation of SmolVLM-500M-Instruct for Multimodal Science Question Answering}
 
 \author{
   Che Hung Liao \\
   \texttt{cl8172@nyu.edu}
   \And
-  Elefterios Komvopoulos \\
+  Eleftherios Komvopoulos \\
   \texttt{ek4538@nyu.edu}
 }
 
 \begin{document}
 \maketitle
 
-\begin{abstract}
-We study parameter-efficient fine-tuning of \texttt{HuggingFaceTB/SmolVLM-500M-Instruct} for a multimodal science multiple-choice question answering task with strict course constraints: no external data, Kaggle/Colab-class compute, and fewer than five million trainable parameters. We ran an iterative experiment program with both validation-first screening and leaderboard-facing submission runs, covering prompt/context variants, answer-token-only objective, expanded LoRA target modules, inference scoring strategies, train+val final fitting, and timeout-aware execution plans. Our best score on the public leaderboard is 0.84507 from the Komvopoulos track, and 0.70623 from the Liao track. We provide a consolidated analysis of what worked, what failed, and why, with emphasis on optimization under practical runtime limits.
-\end{abstract}
-
 \section{Introduction}
-This project targets multimodal ScienceQA-style multiple-choice reasoning from image + text context. Each sample contains an image, a question, candidate choices, and optional context fields (e.g., hint and lecture). The model must predict one correct choice index.
+This report studies the \textit{Pixels to Predictions} Kaggle competition, where each example combines an image with textual science-question context and the system must select the correct answer from multiple choices. The task is inherently multimodal: success depends on extracting visual evidence, integrating it with question semantics, and making calibrated discrete decisions at inference time.
 
-Our objective was twofold: (1) maximize leaderboard accuracy under strict course constraints, and (2) produce a reproducible record of how architecture- and pipeline-level decisions affected outcomes. Instead of a single monolithic training run, we used staged ablations and promotion gates (validation-first, then submission-mode) to manage risk and compute.
+The project is motivated by a practical constraint setting that mirrors real deployment tradeoffs. All runs must use a fixed base model family, keep trainable parameters below 5M, and complete reliably within Kaggle notebook runtime limits. Under these conditions, naive scaling is not sufficient: larger or longer runs can fail to finish, while prompt-heavy changes can increase complexity without improving score. This makes systematic, phase-based ablation necessary to identify which modifications deliver robust gains and which create regressions or operational risk.
 
-We summarize two complementary experiment tracks. The Komvopoulos track emphasizes systematic architecture/prompt/image-processing evolution and reaches 0.84507 public score. The Liao track emphasizes robust Kaggle execution, timeout-aware submission workflows, and progressive improvements from baseline to 0.70623.
+The approach in this report is a controlled QLoRA adaptation program built on \texttt{HuggingFaceTB/SmolVLM-500M-Instruct}. Experiments are organized into phases covering baseline stabilization, optimization and adapter-capacity tuning, context/prompt ablations, vision preprocessing and template alignment, and runtime-safe inference design. Across these phases, each run is tracked with explicit identifiers and configuration metadata, enabling direct comparison of learning-rate choices, LoRA target modules, trainable-parameter budget usage, image-processing settings, scoring policy, and execution outcomes.
+
+The main contribution is an end-to-end empirical map of quality--runtime tradeoffs for parameter-efficient multimodal adaptation under hard platform constraints. Beyond reporting final scores, the study provides an auditable experiment registry and a reproducible workflow that distinguishes model-quality improvements from infrastructure-side effects such as timeout, formatting errors, and submission fragility.
 
 \section{Dataset}
-The competition dataset contains train/validation/test CSV files with image-linked science QA samples. Key fields include \texttt{id}, \texttt{image\_path}, \texttt{question}, \texttt{choices}, \texttt{num\_choices}, and \texttt{answer} for labeled splits. Additional context fields include \texttt{hint}, \texttt{lecture}, and metadata columns such as \texttt{subject}, \texttt{grade}, and \texttt{topic}.
+The competition dataset is a multimodal multiple-choice science question answering corpus in which each sample combines textual problem context with a referenced image. The prediction target is a single correct answer choice among a variable number of candidate options.
 
-We parsed \texttt{choices} from JSON strings, resolved image paths robustly for Kaggle directory conventions, and built prompt variants that selectively include context fields. In late-stage runs, we also used train+val fitting for final submission-oriented training when time budget allowed.
+The provided data is organized into three tabular files---\texttt{train.csv}, \texttt{val.csv}, and \texttt{test.csv}---together with an \texttt{images/} directory containing the visual assets referenced by the tables. Each row corresponds to one question instance and includes an identifier field, a question text field, a serialized set of answer choices, and an image path that links the row to its corresponding image file.
+
+At the schema level, core fields include \texttt{id}, \texttt{image\_path}, \texttt{question}, \texttt{choices}, and \texttt{num\_choices}, with \texttt{answer} available in labeled splits. The dataset also includes optional auxiliary context fields such as \texttt{hint} and \texttt{lecture}, and may include additional metadata attributes (e.g., topic- or curriculum-related descriptors) depending on split.
+
+Preprocessing focuses on converting this schema into stable multimodal model inputs rather than on heavy data augmentation. First, \texttt{choices} is parsed from serialized storage into an ordered option list so that each candidate can be mapped consistently to its answer letter during training and scoring. Second, prompt text is constructed from question and choice content, with optional inclusion of \texttt{hint}, \texttt{lecture}, and metadata fields in selected ablations. Third, long context fields are truncated with explicit character budgets to control sequence length, reduce prompt noise, and preserve runtime feasibility.
+
+On the supervision side, labeled rows are converted into single-choice targets with controlled formatting (letter-based decoding and, in selected runs, answer-token-focused supervision). On the visual side, images are not manually augmented with custom transforms; instead, resizing and normalization are delegated to the pretrained processor so that image policy remains consistent with model expectations. Experimental variation is introduced through processor-scale settings (e.g., different image-size and longest-edge configurations) and prompt/context composition, which are treated as controlled variables in later phases.
 
 \section{Model}
-We use \texttt{HuggingFaceTB/SmolVLM-500M-Instruct} (Idefics3 family) with 4-bit NF4 quantization and LoRA/QLoRA-style adaptation. The hard course constraint is fewer than 5M trainable parameters.
+All experiments use \texttt{HuggingFaceTB/SmolVLM-500M-Instruct} as the base model. This choice satisfies the competition framing and provides a practical multimodal foundation for image-conditioned question answering within Kaggle notebook limits.
 
-Across runs, we explored two major adapter target regimes:
-\begin{itemize}
-  \item Attention-only targets: \texttt{q\_proj, k\_proj, v\_proj, o\_proj}.
-  \item Expanded attention+MLP targets: \texttt{q/k/v/o + gate\_proj/up\_proj/down\_proj}.
-\end{itemize}
+At a high level, the model combines a vision pathway and a language-generation pathway through a multimodal connector, enabling answer selection from joint visual and textual evidence. In this project, we do not modify the pretrained architecture itself; instead, adaptation is performed through parameter-efficient fine-tuning.
 
-To stay under budget safely, we used cap checks and (in later versions) candidate-rank selection logic. Most stable high-performing runs used \texttt{r=8, alpha=16} with expanded module targets.
+We adopt a QLoRA-style setup with 4-bit NF4 quantization and LoRA adapters. The pretrained backbone remains frozen, while only adapter parameters are trainable. This design is necessary to meet memory and runtime constraints while still allowing targeted adaptation to the ScienceQA-style task distribution.
+
+A hard project constraint is keeping trainable parameters below 5M. This budget directly determines adapter design: we evaluate both attention-only targets (\texttt{q\_proj, k\_proj, v\_proj, o\_proj}) and expanded target sets that include additional MLP projections (\texttt{gate\_proj, up\_proj, down\_proj}), with selected tests of broader module coverage. LoRA rank, alpha, and dropout are treated as controlled adaptation knobs inside this fixed-cap regime.
+
+From an implementation perspective, model configuration choices are coupled to notebook feasibility: quantization, adapter scope, and precision/runtime compatibility are selected to preserve stable execution on Kaggle GPU environments.
+
+This section defines the shared adaptation framework. The Experimentation section then specifies per-run configuration changes, hypotheses, and ablation logic.
 
 \section{Experimentation}
-\subsection{Liao Track Progression (Che Hung Liao)}
-The Liao track started from a Kaggle-friendly starter notebook, then iterated through submission-safe experiment folders with strict tracking. The strongest improvements came from:
-\begin{itemize}
-  \item Full-context prompting (lecture + hint enabled) in screening runs.
-  \item Cap-safe high-capacity LoRA module expansion.
-  \item Left-inspired choice-order augmentation and per-choice log-likelihood scoring.
-\end{itemize}
+\subsection*{Phase 1: Baseline and Pipeline Stabilization (E01--E04, L02)}
+The experimental program began by stabilizing the end-to-end Kaggle workflow so that later score changes could be interpreted as modeling effects rather than execution artifacts. E01 established a Kaggle-compatible baseline submission path. E02 then introduced QLoRA with attention-only adapters (\texttt{q\_proj, k\_proj, v\_proj, o\_proj}, \texttt{r=8}, \texttt{alpha=16}, \texttt{dropout=0.05}), which created the first parameter-efficient training backbone under quantization. E03 and E04 reduced training/validation windows (\texttt{max\_train}, \texttt{max\_val}) and used smaller image settings to verify data-path correctness, label-token extraction, and runtime feasibility before scaling. In parallel, L02 provided an independent high-rank attention-only reference point (\texttt{r=16}, \texttt{alpha=32}), useful for checking whether early behavior was dominated by under-capacity or by optimization instability.
 
-We also tested answer-token-only supervision, prompt metadata injection, continuation fine-tuning from prior adapters, and timeout-safe inference-only fallback runs. Multiple experiments timed out near Kaggle limits; this heavily shaped final workflow design.
+\subsection*{Phase 2: Optimization and Adapter-Capacity Tuning (E05--E07, E14--E17, L03, L06--L07)}
+After the pipeline was stable, the next set of runs targeted optimization dynamics and representational capacity. E05 and E06 scaled training volume while varying learning rate and accumulation behavior, testing whether additional examples alone would improve generalization. Because larger sample budgets increased gradient noise and runtime pressure, E07 performed explicit learning-rate recovery (\texttt{1e-4}) to restore stable convergence. Once this optimization floor was established, capacity was expanded in E16/E17 from attention-only adapters to attention+MLP targets (\texttt{gate\_proj, up\_proj, down\_proj}) while enforcing the hard trainable-parameter cap below 5M. E14 framed this transition under a near-10h budget with full-context prompting, and E17 converted the higher-capacity setting into a submission run. In the same phase, L03 validated that expanding target modules under lower LR can provide large gains, L06 tested higher visual resolution within the same adapter family, and L07 stress-tested broader target coverage near the cap. These runs collectively tested the hypothesis that score improvements require jointly tuning optimization and adapter expressiveness rather than increasing either in isolation.
 
-\subsection{Komvopoulos Track Progression (Elefterios Komvopoulos)}
-The Komvopoulos track executed a deeper versioned sequence (v2--v10) and identified several high-impact decisions:
-\begin{itemize}
-  \item Lowering LR and expanding LoRA targets to MLP layers improved generalization.
-  \item Training with leaked \texttt{solution} reasoning caused distribution-shift regression.
-  \item Switching to native chat template and enabling image splitting improved performance.
-  \item Increasing image-processing scale (longest-edge setting) delivered the largest final gain.
-\end{itemize}
+\subsection*{Phase 3: Context and Prompt Ablations (E08--E13, E15, L04--L05, L09)}
+With optimization and capacity controlled, the next phase isolated prompt-content effects. E08, E09, and E10 compared hint-only, hint+lecture, and lecture-only context formulations to test whether auxiliary textual fields improved disambiguation or instead introduced prompt entropy. E12 and E13 then shifted supervision toward answer-token-focused training to better align optimization with the final multiple-choice decision rule. E15 evaluated metadata/system-style prompt structuring under otherwise similar training conditions to test whether additional instruction scaffolding improved compositional use of context. Complementary runs L04 and L05 examined solution-text inclusion and subsequent rollback, which probed whether reasoning-style additions improved calibration or caused mismatch/overfitting. L09 further tested prompt-level modifications after stronger visual and template choices had been introduced. The objective across this phase was to identify which textual context components consistently improved decision quality without destabilizing training or inference behavior.
 
-This track culminated in a best public score of 0.84507 with TTA.
+\subsection*{Phase 4: Vision Preprocessing and Template Alignment (L08A, L08, L10; plus E14, E21, E23, E24)}
+After text-side ablations, experiments focused on the vision-language interface and formatting alignment. A key transition in this phase was prompt serialization format. Earlier runs (E-series and L02--L07) used manually assembled prompt text, while L08A/L08/L10 switched to \texttt{apply\_chat\_template}, i.e., model-native message formatting before tokenization. This change was introduced to reduce train--inference formatting mismatch and better align scoring behavior with the pretrained conversational structure. L08A established a pre-TTA chat-template-aligned submission baseline, L08 added test-time augmentation, and L10 increased processor longest-edge resolution (\texttt{1024}) while keeping the same overall strategy. These runs tested whether improvements came from richer visual detail and tighter match to native multimodal prompt formatting. On the primary branch, E14, E21, E23, and E24 varied image size/runtime combinations under full-context conditions, including continuation behavior, to examine the tradeoff between visual fidelity and completion reliability. This phase was motivated by repeated evidence that representation quality at the vision-text boundary can bottleneck answer selection even when adapter capacity is already near the allowable maximum.
 
-\subsection{Operational constraints}
-All experiments were performed under Kaggle/Colab-class hardware and runtime limits. We explicitly managed timeout risk with:
-\begin{itemize}
-  \item staged screening vs. submission mode,
-  \item reduced-eval or test-only runs when quota was low,
-  \item continuation from prior adapters,
-  \item and fallback submission strategies.
-\end{itemize}
+\subsection*{Phase 5: Inference Strategy and Runtime-Safe Submission Design (E18--E25)}
+The final phase addressed the quality--runtime frontier under strict notebook limits. E18 introduced choice-likelihood style inference probing and was stopped when early signals were weak relative to cost. E19 attempted an aggressive long run (more epochs and hybrid scoring) and timed out, demonstrating that unconstrained schedule expansion can erase potential gains by failing to produce a valid artifact. E20--E22 then introduced timeout-safe submission patterns, including no-train fallback and lightweight inference-only variants, to guarantee deliverable outputs. E23 converted the strongest stable train+infer recipe into the best main-branch public score, E24 tested short continuation from that checkpoint, and E25 evaluated reduced target-module scope with expanded input context as a final tradeoff test. This phase explicitly tested whether inference-policy and execution design could preserve quality while maintaining high probability of completion.
 
-\section{Results}
-To make cross-branch comparison symmetric, we consolidated both tracks into a single experiment registry with normalized identifiers, lineage links, and consistent fields (owner, phase, parent run, LoRA target set, image size, runtime, and score). Table~\ref{tab:unified-experiments} shows selected decision/submission runs, while the complete registry is provided in \texttt{report/experiment\_registry.csv}.
-
-\input{experiment_registry_table}
-
-\paragraph{Key findings.}
-(1) Training loss alone was not a reliable model-selection metric; several lower-loss runs generalized worse. (2) Prompt-template and inference-scoring alignment mattered substantially. (3) Vision-side preprocessing and effective visual token utilization were decisive in the highest-performing track (Komvopoulos track L10, 0.84507). (4) Under tight runtime budgets, operational reliability (finishing runs and producing submissions) was itself a major optimization axis in the Liao track (E20/E23).
-
-\section{Conclusion}
-We presented a constrained multimodal fine-tuning study of SmolVLM-500M-Instruct under a strict 5M trainable-parameter cap and limited Kaggle runtime budget. Across two coordinated experiment tracks, we observed that robust gains came from a combination of cap-safe adapter design, context/prompt discipline, stable per-choice scoring, and (in the strongest track) improved image-processing strategy with native template alignment and TTA. Our best achieved public scores were 0.70623 (Liao track) and 0.84507 (Komvopoulos track).
-
-For future work, we would prioritize controlled multi-seed ensembling under fixed compute budget, formalized calibration for choice probabilities, and a unified high-resolution visual preprocessing path merged with the most stable train+val submission workflow.
-
-\appendix
-\section{Full Experiment Registry}
-For reproducibility and auditability, we include the complete cross-branch registry in Table~\ref{tab:full-registry}. This preserves all tracked runs (E01--E25 and L02--L10) in a symmetric schema. The same data is also available in machine-readable form at \texttt{report/experiment\_registry.csv}.
+Exact per-run settings, including learning rate, epochs, target modules, rank/alpha/dropout, image sizing, objective, runtime status, and scores, are provided in Table~\ref{tab:full-registry}.
 
 \input{experiment_registry_full_table}
 
-\section*{Resources and Disclosure}
-\textbf{Che Hung Liao resources.}
+\section{Results}
+Public leaderboard score is the primary evaluation metric, while runtime completion under Kaggle limits is a hard practical constraint. Accordingly, runs are interpreted by both score and execution outcome (completed vs timeout/error). Table~\ref{tab:result-milestones} summarizes milestone submissions, and Table~\ref{tab:full-registry} provides full per-run metadata.
+
+\begin{table*}[t]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{l p{6.6cm} c l}
+\hline
+Run & Key Change & Public Score & Runtime Status \\
+\hline
+E01 & Kaggle baseline pipeline & 0.65392 & Completed \\
+E11 & First submission from early QLoRA branch (format bug in submission file) & 0.47283 & Completed \\
+E13 & Answer-token-loss submission variant & 0.63983 & Completed \\
+E17 & Near-capacity LoRA (\texttt{q/k/v/o+gate/up/down}, $\sim$4.98M trainable) & 0.69014 & Completed \\
+E20 & Timeout-safe inference-oriented submission recipe & 0.69818 & Completed \\
+E23 & Stable train+infer recipe with stronger context/vision balance & 0.70623 & Completed \\
+E24 & Short continuation from E23 checkpoint & 0.59758 & Completed \\
+E25 & Reduced target modules (\texttt{q/v/o}) with expanded input context & 0.65593 & Completed \\
+L08A & Chat-template-aligned submission without TTA & 0.80885 & Completed \\
+L08 & L08A + TTA at inference & 0.81488 & Completed \\
+L10 & L08 strategy with processor longest-edge 1024 + TTA & 0.84507 & Completed \\
+\hline
+\end{tabular}
+\caption{Milestone runs used for quantitative comparison across the project.}
+\label{tab:result-milestones}
+\end{table*}
+
+Phase 1 (E01--E04, L02) established that a runnable notebook does not guarantee a strong score, but it provided the necessary measurement baseline and debugging scaffold. E01 delivered a competitive starting score, while E02--E04 confirmed that QLoRA training could run reliably under constrained settings. L02 showed that simply increasing LoRA rank at this stage was not sufficient to exceed stronger later configurations, reinforcing that pipeline correctness and optimization control were prerequisites for improvement.
+
+Phase 2 (E05--E07, E14--E17, L03, L06--L07) produced the first consistent upward movement by jointly tuning optimization and adapter capacity. E05--E07 demonstrated that data scale and learning rate are tightly coupled; increasing sample count without retuning degraded behavior, while LR recovery restored stability. E16/E17 then showed that expanding target modules to include MLP projections under the $<5$M cap improved downstream submission quality. L03 and L06 corroborated this trend, indicating that broader adaptation space and improved visual detail can compound gains when training remains stable.
+
+Phase 3 (E08--E13, E15, L04--L05, L09) showed mixed effects from textual context and prompting choices. Hint-only and lecture-only variants did not produce meaningful gains over the recovered optimization baseline, and several prompt-structure changes regressed. The answer-token-loss path (E12 $\rightarrow$ E13) improved over earlier faulty submission behavior and recovered baseline-level competitiveness, but did not match later capacity+vision tuned runs. Similar behavior appeared in L04/L05/L09, where some text-level interventions helped only after incompatible variants were removed.
+
+Phase 4 (L08A, L08, L10; plus E14, E21, E23, E24) delivered the largest absolute score improvements through vision-template alignment and inference robustness. On the L-series branch, moving from L08A to L08 isolated a positive TTA gain, and L10 further improved with larger effective visual processing scale. On the E-series branch, E23 became the strongest completed submission by balancing image size, context usage, and completion reliability. Taken together, these results indicate that once adapter capacity is near the cap, improvements are driven more by representation fidelity and inference policy than by additional prompt complexity.
+
+The image-scale signal is particularly strong in this phase. E-series best performance was obtained with lower image settings (e.g., E23 at image size 160, score 0.70623), whereas the L-series progressed from higher image settings to higher scores (L08A at 384, 0.80885; L08 at 384 with TTA, 0.81488; L10 at 1024 with TTA, 0.84507). This pattern is not a strict causal proof because template formatting and TTA policy also changed, but the monotonic improvement within the L08A$\rightarrow$L08$\rightarrow$L10 family strongly suggests that larger effective visual processing scale was a major contributor to score gains.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{l c c c c c c}
+\hline
+Run & Img & LoRA Targets & Trainable & Prompt Format & TTA & Score \\
+\hline
+E23 & 160 & q/k/v/o+MLP & $\sim$4.98M & manual prompt & No & 0.70623 \\
+E25 & 192 & q/v/o & $\sim$3.25M & manual prompt & No & 0.65593 \\
+L08A & 384 & q/k/v/o+MLP & $\sim$4.9M & apply\_chat\_template & No & 0.80885 \\
+L08 & 384 & q/k/v/o+MLP & $\sim$4.9M & apply\_chat\_template & Yes & 0.81488 \\
+L10 & 1024 & q/k/v/o+MLP & $\sim$4.9M & apply\_chat\_template & Yes & 0.84507 \\
+\hline
+\end{tabular}
+\caption{Comparative view of image scale and key confounders across representative runs. ``Prompt Format'' indicates whether inputs were manually assembled or serialized with \texttt{apply\_chat\_template}.}
+\label{tab:image-policy}
+\end{table}
+
+Phase 5 (E18--E25) quantified the quality--runtime tradeoff directly. Aggressive long schedules (E19, E21) timed out and yielded no valid submission, despite potentially promising intermediate metrics. Runtime-safe alternatives (E20, E22) guaranteed deliverables, and E23 provided the best main-branch score among completed runs. Follow-up variants E24 and E25 regressed, indicating that short continuation or narrower target-module choices can degrade generalization even when they appear computationally attractive.
+
+Overall, the best score in the unified registry is L10 (0.84507), while the best score on the main E-series branch is E23 (0.70623). The gap between these runs is primarily associated with stronger vision preprocessing, tighter template alignment, and inference-time augmentation choices that were fully operationalized in the L10 pipeline.
+
+\section{Conclusion}
+This project presented a systematic study of parameter-efficient adaptation for multimodal science question answering under strict operational constraints. All runs were conducted with a fixed base model family and QLoRA-style adaptation, while respecting a hard trainable-parameter budget ($<5$M) and Kaggle notebook runtime limits. The core objective was not only to improve leaderboard score, but to do so with configurations that reliably complete and produce valid submissions.
+
+Across phases, the most consistent gains came from combining near-capacity adapter design with stronger vision-template alignment and robust inference policy. Expanding LoRA target modules from attention-only to attention+MLP projections improved representational flexibility within budget, while chat-template alignment, larger visual processing scale, and test-time augmentation produced the largest downstream score increases. In contrast, several textual prompt/context variants provided limited or unstable benefit, and aggressive long-horizon schedules frequently failed at the systems level due to timeout risk.
+
+Quantitatively, the strongest completed run on the main E-series branch was E23 (0.70623), while the best integrated run in the full registry was L10 (0.84507). The remaining performance gap indicates that additional gains were primarily unlocked by higher-fidelity vision preprocessing and inference-time robustness choices rather than by further prompt complexity or marginal optimizer changes alone.
+
+From a reproducibility perspective, the report provides both a milestone result table and a full experiment registry with per-run identifiers, objectives, key hyperparameters, runtime outcomes, and public scores. This record supports end-to-end auditability of design decisions and offers a practical blueprint for future extensions under similar parameter and platform constraints.
+
+Three concrete future directions are prioritized for score improvement. First, a layer-wise non-uniform LoRA allocation strategy can be tested under the same $<5$M trainable-parameter budget by assigning higher rank to high-impact layers and lower rank to lower-impact layers, rather than using a single uniform rank everywhere. Second, cross-validation adapter aggregation can be evaluated by training multiple fold-specific adapters with the same recipe and averaging their choice log-probabilities at inference, which may reduce run-to-run variance and improve leaderboard stability. Third, a teacher-student distillation pipeline can be introduced by using a stronger scoring configuration to generate soft targets and then fine-tuning a runtime-safe student adapter on those targets, with the goal of transferring quality while preserving execution reliability.
+
+\section*{Resources and Tooling Disclosure}
+\noindent\textbf{Code repositories (by experiment series).}
 \begin{itemize}
-  \item Repository: \url{https://github.com/shanpig/dl-kaggle-final}
-  \item Model weights (Exp17 adapter): \url{https://www.kaggle.com/models/chehungliao/exp17-best-adapter}
-  \item Model weights (Exp23 adapter): \url{https://www.kaggle.com/models/chehungliao/exp23-best-adapter}
+  \item E-series repository (E01--E25): \url{https://github.com/shanpig/dl-kaggle-final}
+  \item L-series repository (L02--L10): \url{https://github.com/lefteriskomvopoulos/PixelsToPredictions}
 \end{itemize}
 
-\noindent\textbf{Elefterios Komvopoulos resources.}
+\noindent\textbf{Model weights (mapped to report IDs).}
 \begin{itemize}
-  \item Repository: \url{https://github.com/lefteriskomvopoulos/PixelsToPredictions}
-  \item Model weights (best LoRA, seed42): \url{https://github.com/lefteriskomvopoulos/PixelsToPredictions/blob/main/lora-final-seed42.zip}
+  \item E17 adapter: \url{https://www.kaggle.com/models/chehungliao/exp17-best-adapter}
+  \item E23 adapter: \url{https://www.kaggle.com/models/chehungliao/exp23-best-adapter}
+  \item L10 LoRA archive (seed42): \url{https://github.com/lefteriskomvopoulos/PixelsToPredictions/blob/main/lora-final-seed42.zip}
 \end{itemize}
 
-\textbf{AI tooling disclosure.} We used LLM assistants (including ChatGPT/Codex-style tools) for coding support, debugging, experiment tracking, and report drafting/editing. Final experiment decisions, execution, and result interpretation were performed by the authors.
+\noindent\textbf{AI tooling disclosure.}
+Large language model assistance was used for coding support, debugging support, experiment tracking support, and report drafting/refinement. All final experiment design choices, execution decisions, and reported results were verified and curated by the authors.
 
 \end{document}

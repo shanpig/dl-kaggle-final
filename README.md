@@ -65,7 +65,7 @@ Reference score:
 - Main repo (Che Hung Liao): https://github.com/shanpig/dl-kaggle-final
   - Exp17 adapter: https://www.kaggle.com/models/chehungliao/exp17-best-adapter
   - Exp23 adapter: https://www.kaggle.com/models/chehungliao/exp23-best-adapter
-- Teammate repo (Elefterios Komvopoulos): https://github.com/lefteriskomvopoulos/PixelsToPredictions
+- Teammate repo (Eleftherios Komvopoulos): https://github.com/lefteriskomvopoulos/PixelsToPredictions
   - Left branch best LoRA weights (seed42): https://github.com/lefteriskomvopoulos/PixelsToPredictions/blob/main/lora-final-seed42.zip
 
 ## Report

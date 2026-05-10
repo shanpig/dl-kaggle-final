@@ -1,23 +1,23 @@
 \begin{table*}[t]
 \centering
 \small
-\begin{tabular}{l l l l l l l l}
+\begin{tabular}{l l l l l l l}
 \hline
-Exp & Owner & Phase & Parent & LoRA Targets & Img Size & Runtime (min) & Public Score \\
+Exp & Phase & Parent & LoRA Targets & Img Size & Runtime (min) & Public Score \
 \hline
-E01 & Liao & baseline & -- & -- & -- & -- & 0.65392 \\
-E11 & Liao & submission & E07 & q/k/v/o & 192 & 331.1 & 0.47283 \\
-E13 & Liao & submission & E12 & q/k/v/o & 192 & 330.8 & 0.63983 \\
-E17 & Liao & submission & E16 & q/k/v/o+gate/up/down & 192 & 363.4 & 0.69014 \\
-E20 & Liao & submission & E19 & q/k/v/o+gate/up/down & 192 & -- & 0.69818 \\
-E23 & Liao & submission & E20 & q/k/v/o+gate/up/down & 160 & 475.6 & 0.70623 \\
-E24 & Liao & continuation & E23 & q/k/v/o+gate/up/down & 160 & 169.9 & 0.59758 \\
-E25 & Liao & submission & E23 & q/v/o & 192 & 431.4 & 0.65593 \\
-L08 & Komvopoulos & submission & L06 & q/k/v/o+gate/up/down & 384 & -- & 0.81488 \\
-L09 & Komvopoulos & submission & L08 & q/k/v/o+gate/up/down & 384 & -- & 0.80482 \\
-L10 & Komvopoulos & submission & L08 & q/k/v/o+gate/up/down & 1024 & -- & \textbf{0.84507} \\
+E01 & baseline & -- & NA & NA & NA & 0.65392 \
+E11 & submission & E07 & q/k/v/o & 192 & 331.1 & 0.47283 \
+E13 & submission & E12 & q/k/v/o & 192 & 330.8 & 0.63983 \
+E17 & submission & E16 & q/k/v/o+gate/up/down & 192 & 363.4 & 0.69014 \
+E20 & submission & E19 & q/k/v/o+gate/up/down & 192 & NA & 0.69818 \
+E23 & submission & E20 & q/k/v/o+gate/up/down & 160 & 475.6 & 0.70623 \
+E24 & continuation & E23 & q/k/v/o+gate/up/down & 160 & 169.9 & 0.59758 \
+E25 & submission & E23 & q/v/o & 192 & 431.4 & 0.65593 \
+L08 & submission & L06 & q/k/v/o+gate/up/down & 384 & NA & 0.81488 \
+L09 & submission & L08 & q/k/v/o+gate/up/down & 384 & NA & 0.80482 \
+L10 & submission & L08 & q/k/v/o+gate/up/down & 1024 & NA & \textbf{0.84507} \
 \hline
 \end{tabular}
-\caption{Unified experiment registry (selected submission/decision runs). Full registry is provided in \texttt{report/experiment\_registry.csv}.}
+\caption{Milestone runs in the unified experiment storyline.}
 \label{tab:unified-experiments}
 \end{table*}

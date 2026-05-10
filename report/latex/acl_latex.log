@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.4)  8 MAY 2026 15:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.4)  9 MAY 2026 20:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -308,76 +308,46 @@ File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
 \zifour@ocount=\count291
 )
-(/usr/local/texlive/2025/texmf-dist/tex/latex/booktabs/booktabs.sty
-Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen163
-\lightrulewidth=\dimen164
-\cmidrulewidth=\dimen165
-\belowrulesep=\dimen166
-\belowbottomsep=\dimen167
-\aboverulesep=\dimen168
-\abovetopsep=\dimen169
-\cmidrulesep=\dimen170
-\cmidrulekern=\dimen171
-\defaultaddspace=\dimen172
-\@cmidla=\count292
-\@cmidlb=\count293
-\@aboverulesep=\dimen173
-\@belowrulesep=\dimen174
-\@thisruleclass=\count294
-\@lastruleclass=\count295
-\@thisrulewidth=\dimen175
-)
-(/usr/local/texlive/2025/texmf-dist/tex/latex/tools/array.sty
-Package: array 2024/10/17 v2.6g Tabular extension package (FMi)
-\col@sep=\dimen176
-\ar@mcellbox=\box53
-\extrarowheight=\dimen177
-\NC@list=\toks25
-\extratabsurround=\skip56
-\backup@length=\skip57
-\ar@cellbox=\box54
-)
 (/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count296
-\l__pdf_internal_box=\box55
+\l__color_backend_stack_int=\count292
+\l__pdf_internal_box=\box53
 )
 (./acl_latex.aux)
 \openout1 = `acl_latex.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
 
 (/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count297
-\scratchdimen=\dimen178
-\scratchbox=\box56
-\nofMPsegments=\count298
-\nofMParguments=\count299
-\everyMPshowfont=\toks26
-\MPscratchCnt=\count300
-\MPscratchDim=\dimen179
-\MPnumerator=\count301
-\makeMPintoPDFobject=\count302
-\everyMPtoPDFconversion=\toks27
+\scratchcounter=\count293
+\scratchdimen=\dimen163
+\scratchbox=\box54
+\nofMPsegments=\count294
+\nofMParguments=\count295
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count296
+\MPscratchDim=\dimen164
+\MPnumerator=\count297
+\makeMPintoPDFobject=\count298
+\everyMPtoPDFconversion=\toks26
 )
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -416,25 +386,25 @@ LaTeX Font Info:    ... okay on input line 23.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 23.
+Package hyperref Info: Link coloring ON on input line 20.
 (./acl_latex.out) (./acl_latex.out)
 \@outlinefile=\write3
 \openout3 = `acl_latex.out'.
 
-LaTeX Info: Redefining \microtypecontext on input line 23.
-Package microtype Info: Applying patch `item' on input line 23.
-Package microtype Info: Applying patch `toc' on input line 23.
-Package microtype Info: Applying patch `eqnum' on input line 23.
-Package microtype Info: Applying patch `footnote' on input line 23.
-Package microtype Info: Applying patch `verbatim' on input line 23.
-LaTeX Info: Redefining \microtypesetup on input line 23.
+LaTeX Info: Redefining \microtypecontext on input line 20.
+Package microtype Info: Applying patch `item' on input line 20.
+Package microtype Info: Applying patch `toc' on input line 20.
+Package microtype Info: Applying patch `eqnum' on input line 20.
+Package microtype Info: Applying patch `footnote' on input line 20.
+Package microtype Info: Applying patch `verbatim' on input line 20.
+LaTeX Info: Redefining \microtypesetup on input line 20.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 23.
+LaTeX Info: Redefining \showhyphens on input line 20.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -451,77 +421,66 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 (RS)
 )
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 24.
+(Font)              <12> on input line 21.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 24.
+(Font)              <8> on input line 21.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 24.
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 24
+(Font)              <6> on input line 21.
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 21
 .
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Trying to load font information for T1+zi4 on input line 24
+LaTeX Font Info:    Trying to load font information for T1+zi4 on input line 21
 .
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/inconsolata/t1zi4.fd
 File: t1zi4.fd 2018/01/14 T1/zi4 (Inconsolata)
 )
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 12.0pt on input line 24.
+(Font)              scaled to size 12.0pt on input line 21.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `zi4' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 10.0pt on input line 27.
+(Font)              scaled to size 10.95pt on input line 28.
 
-Underfull \hbox (badness 10000) in paragraph at lines 27--28
-\T1/zi4/m/n/10 HuggingFaceTB/SmolVLM-500M-Instruct
+Underfull \hbox (badness 7595) in paragraph at lines 28--29
+[]\T1/ptm/m/n/10.95 (+20) The ap-proach in this re-port is a con-
  []
 
 
-Underfull \hbox (badness 2452) in paragraph at lines 27--28
-\T1/ptm/m/n/10 (+20) for a mul-ti-modal sci-ence multiple-choice
+Underfull \hbox (badness 2635) in paragraph at lines 28--29
+\T1/ptm/m/n/10.95 (+20) trolled QLoRA adap-ta-tion pro-gram built on
  []
 
 
-Underfull \hbox (badness 1024) in paragraph at lines 27--28
-\T1/ptm/m/n/10 (+20) prompt/context vari-ants, answer-token-only
- []
-
-LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 10.95pt on input line 38.
-
-Underfull \hbox (badness 10000) in paragraph at lines 38--39
-\T1/ptm/m/n/10.95 (+20) The com-pe-ti-tion dataset con-tains
+Underfull \hbox (badness 1052) in paragraph at lines 28--29
+\T1/ptm/m/n/10.95 (+20) per-i-ments are or-ga-nized into phases cov-er-ing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--39
-\T1/ptm/m/n/10.95 (+20) train/validation/test CSV files with image-
- []
-
-
-Underfull \hbox (badness 2393) in paragraph at lines 38--39
-\T1/ptm/m/n/10.95 (+20) fields in-clude \T1/zi4/m/n/10.95 hint\T1/ptm/m/n/10.95
- (+20) , \T1/zi4/m/n/10.95 lecture\T1/ptm/m/n/10.95 (+20) , and meta-data
+Underfull \hbox (badness 1389) in paragraph at lines 28--29
+\T1/ptm/m/n/10.95 (+20) capacity tun-ing, con-text/prompt ab-la-tions, vi-
  []
 
 
 
 
-Overfull \hbox (4.50769pt too wide) in paragraph at lines 43--44
-\T1/ptm/m/n/10.95 (-20) We use \T1/zi4/m/n/10.95 HuggingFaceTB/SmolVLM-500M-Ins
-truct
+Underfull \hbox (badness 3323) in paragraph at lines 37--38
+[]\T1/ptm/m/n/10.95 (+20) At the schema level, core fields in-clude
  []
 
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 4
-7.
-(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ts1ptm.fd
-File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-)
+
+Underfull \hbox (badness 6477) in paragraph at lines 37--38
+\T1/zi4/m/n/10.95 id\T1/ptm/m/n/10.95 (+20) , \T1/zi4/m/n/10.95 image_path\T1/p
+tm/m/n/10.95 (+20) , \T1/zi4/m/n/10.95 question\T1/ptm/m/n/10.95 (+20) , \T1/zi
+4/m/n/10.95 choices\T1/ptm/m/n/10.95 (+20) , and
+ []
+
+
 
 [1{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/l
 ocal/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive/20
@@ -530,86 +489,170 @@ ocal/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive/20
 
 
 ]
-Underfull \hbox (badness 2065) in paragraph at lines 62--63
-\T1/ptm/m/n/10.95 (+20) prompt meta-data in-jec-tion, con-tin-u-a-tion fine-
+Underfull \hbox (badness 10000) in paragraph at lines 44--45
+\T1/ptm/m/n/10.95 (+20) All ex-per-i-ments use
  []
 
 
-Underfull \hbox (badness 1540) in paragraph at lines 62--63
-\T1/ptm/m/n/10.95 (+20) tuning from prior adapters, and timeout-safe
+Underfull \hbox (badness 10000) in paragraph at lines 44--45
+\T1/zi4/m/n/10.95 HuggingFaceTB/SmolVLM-500M-Instruct
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 76--77
-\T1/ptm/m/n/10.95 (+20) All ex-per-i-ments were per-formed un-der
+Underfull \hbox (badness 1205) in paragraph at lines 44--45
+\T1/ptm/m/n/10.95 (+20) com-pe-ti-tion fram-ing and pro-vides a prac-ti-cal
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 76--77
-\T1/ptm/m/n/10.95 (+20) Kaggle/Colab-class hard-ware and run-time
+Underfull \hbox (badness 2384) in paragraph at lines 44--45
+\T1/ptm/m/n/10.95 (+20) mul-ti-modal foun-da-tion for image-conditioned
+ []
+
+
+Underfull \hbox (badness 1383) in paragraph at lines 50--51
+[]\T1/ptm/m/n/10.95 (+20) A hard project con-straint is keep-ing train-
  []
 
 
 
-(./experiment_registry_table.tex
+
+Underfull \hbox (badness 1117) in paragraph at lines 58--59
+\T1/ptm/m/n/10.95 (+20) ing/validation win-dows (\T1/zi4/m/n/10.95 max_train\T1
+/ptm/m/n/10.95 (+20) , \T1/zi4/m/n/10.95 max_val\T1/ptm/m/n/10.95 (+20) )
+ []
+
+
+
+[2]
+
+(./experiment_registry_full_table.tex
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 4.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 4.
-) (./experiment_registry_full_table.tex
-Overfull \hbox (36.5899pt too wide) in paragraph at lines 5--45
+(Font)              <5> on input line 5.
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--9
+[]\T1/ptm/m/n/6 (+20) Kaggle-compatible base-line
+ []
+
+
+Underfull \hbox (badness 2050) in paragraph at lines 33--33
+[]\T1/ptm/m/n/6 (+20) Final more-input less-modules
+ []
+
+
+Overfull \hbox (3.92203pt too wide) in paragraph at lines 39--39
+[]\T1/ptm/m/n/6 (-20) q/k/v/o+gate/up/down+out_proj| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 40--40
+[]\T1/ptm/m/n/6 (+20) letter-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--42
+[]\T1/ptm/m/n/6 (+20) letter-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 43--43
+[]\T1/ptm/m/n/6 (+20) letter-
+ []
+
+
+Overfull \hbox (29.05084pt too wide) in paragraph at lines 5--46
  [][] 
  []
 
 )
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 83.
+LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
+(Font)              scaled to size 9.0pt on input line 90.
 
-[2]
+Underfull \hbox (badness 10000) in paragraph at lines 90--90
+[]\T1/ptm/m/n/9 (+20) Near-capacity LoRA (\T1/zi4/m/n/9 q/k/v/o+gate/up/down\T1
+/ptm/m/n/9 (+20) ,
+ []
+
+
+
+[3]
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <10.95> on input line 106.
 
-Underfull \hbox (badness 10000) in paragraph at lines 106--107
-[]\T1/ptm/m/n/10.95 (+20) Repository: [][]$\T1/zi4/m/n/10.95 https : / / github
- . com /
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 118.
+
+Overfull \hbox (13.41058pt too wide) in paragraph at lines 118--129
+ [][] 
+ []
+
+LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
+(Font)              scaled to size 10.0pt on input line 129.
+
+Underfull \hbox (badness 1552) in paragraph at lines 133--134
+[]\T1/ptm/m/n/10.95 (+20) Phase 5 (E18--E25) quan-ti-fied the quality--
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 107--108
-[]\T1/ptm/m/n/10.95 (+20) Model weights (Exp17 adapter):
+Underfull \hbox (badness 1389) in paragraph at lines 138--139
+\T1/ptm/m/n/10.95 (+20) This project pre-sented a sys-tem-atic study of
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 107--108
-[][]$\T1/zi4/m/n/10.95 https : / / www . kaggle . com / models /
+
+[4]
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
+51.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
+)
+Underfull \hbox (badness 5388) in paragraph at lines 152--153
+[]\T1/ptm/m/n/10.95 (+20) L-series repos-i-tory (L02--L10): [][]$\T1/zi4/m/n/10
+.95 https :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 108--109
-[]\T1/ptm/m/n/10.95 (+20) Model weights (Exp23 adapter):
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 108--109
-[][]$\T1/zi4/m/n/10.95 https : / / www . kaggle . com / models /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 113--114
-[]\T1/ptm/m/n/10.95 (+20) Repository: [][]$\T1/zi4/m/n/10.95 https : / / github
- .
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 113--114
-\T1/zi4/m/n/10.95 com / lefteriskomvopoulos /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 114--115
+Underfull \hbox (badness 10000) in paragraph at lines 152--153
 \T1/zi4/m/n/10.95 / / github . com / lefteriskomvopoulos /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--115
+Underfull \hbox (badness 10000) in paragraph at lines 157--158
+[]\T1/ptm/m/n/10.95 (+20) E17 adapter: [][]$\T1/zi4/m/n/10.95 https : / / www .
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 157--158
+\T1/zi4/m/n/10.95 kaggle . com / models / chehungliao /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--159
+[]\T1/ptm/m/n/10.95 (+20) E23 adapter: [][]$\T1/zi4/m/n/10.95 https : / / www .
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--159
+\T1/zi4/m/n/10.95 kaggle . com / models / chehungliao /
+ []
+
+
+Underfull \hbox (badness 8113) in paragraph at lines 159--160
+[]\T1/ptm/m/n/10.95 (+20) L10 LoRA archive (seed42): [][]$\T1/zi4/m/n/10.95 htt
+ps :
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 159--160
+\T1/zi4/m/n/10.95 / / github . com / lefteriskomvopoulos /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 159--160
 \T1/zi4/m/n/10.95 PixelsToPredictions / blob / main /
  []
 
@@ -617,31 +660,42 @@ Underfull \hbox (badness 10000) in paragraph at lines 114--115
 
 
 
-[3
+[5] [6]
 
-] [4] (./acl_latex.aux)
+
+
+[7
+
+
+] (./acl_latex.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `acl_latex.out' has not changed.
-(rerunfilecheck)             Checksum: 9253E63340B7DB7E30D202C8392A4E85;1497.
+(rerunfilecheck)             Checksum: A8C8C84A6A90F239FC60B5EBAD8214A5;538.
  ) 
 Here is how much of TeX's memory you used:
- 13831 strings out of 473190
- 222282 string characters out of 5715801
- 707158 words of memory out of 5000000
- 36722 multiletter control sequences out of 15000+600000
- 597382 words of font info for 184 fonts, out of 8000000 for 9000
+ 13744 strings out of 473190
+ 220371 string characters out of 5715801
+ 719270 words of memory out of 5000000
+ 36590 multiletter control sequences out of 15000+600000
+ 602899 words of font info for 220 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,10n,93p,1006b,526s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,11n,93p,1329b,510s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/inconsolata/Inconsolat
-a-zi4r.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb
-></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on acl_latex.pdf (4 pages, 66177 bytes).
+a-zi4r.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
+10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7
+.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.p
+fb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/l
+ocal/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texli
+ve/2025/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on acl_latex.pdf (7 pages, 130493 bytes).
 PDF statistics:
- 106 PDF objects out of 1000 (max. 8388607)
- 93 compressed objects within 1 object stream
- 19 named destinations out of 1000 (max. 500000)
- 43601 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 143 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
+ 23 named destinations out of 1000 (max. 500000)
+ 48689 words of extra memory for PDF output out of 51595 (max. 10000000)
 
